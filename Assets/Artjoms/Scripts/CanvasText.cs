@@ -42,7 +42,7 @@ public class CanvasText : MonoBehaviour
 
             displayedText = elapsedMinutes + ":" + elapsedSeconds;
 
-            Debug.Log(displayedText);
+            //Debug.Log(displayedText);
             canvases[1].text = displayedText;
         }
     }
