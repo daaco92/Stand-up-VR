@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -14,12 +12,13 @@ public class CanvasText : MonoBehaviour
     {   
         //StartCoroutine("TeleprompterJokes");
         jokes = new GetJokeScript();
+        //StartCoroutine(TeleprompterJokes());
     }
 
     private void Update ()
     {
         timer += Time.deltaTime;
-        TimeConverter();
+        //TimeConverter();
     }
 
     private void TimeConverter()
@@ -31,23 +30,19 @@ public class CanvasText : MonoBehaviour
         canvases[1].text = formatedTime;
     }
 
+    //Under Construction
+    // private IEnumerator TeleprompterJokes()
+    // {
+    //     while(true)
+    //     {
+    //         text = jokes.GetJoke();
+    //         Debug.Log(text[0]);
+    //         yield return new WaitForSeconds(3);
 
-
-
-
-
-
-
-
-    private IEnumerator TeleprompterJokes()
-    {
-            text = jokes.GetJoke();
-            //Debug.Log("now " + text[0] + " " + text[0].Length);
-            yield return new WaitForSeconds(3);
-
-            //Debug.Log("now" + text[1] + " " + text[0].Length);
-            yield return new WaitForSeconds(3);
-    }
+    //         Debug.Log(text[1]);
+    //         yield return new WaitForSeconds(20);
+    //     }
+    // }
 
     //Never to be spoken about (Learning opportunity)
     // private IEnumerator TimeCounter()

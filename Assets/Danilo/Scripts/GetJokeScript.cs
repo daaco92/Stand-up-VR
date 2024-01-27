@@ -22,8 +22,8 @@ public class GetJokeScript
             Joke result = JsonConvert.DeserializeObject<Joke>(json);
             
             
-            Debug.Log(result.setup);
-            Debug.Log(result.delivery);
+            // Debug.Log(result.setup);
+            // Debug.Log(result.delivery);
 
             joke[0] = result.setup;
             joke[1] = result.delivery;
