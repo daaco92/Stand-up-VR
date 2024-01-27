@@ -31,8 +31,8 @@ public class ProjectileScript : MonoBehaviour
     }
 
     IEnumerator Throw(GameObject thrower){
+        thrower.GetComponent<Animator>().Play("New State 0");
         yield return new WaitForSeconds(0.8f);
-            thrower.GetComponent<Animator>().Play("New State 0");
             throwRelease = thrower.transform.GetChild(3).transform;
             throwRelease.LookAt(target.transform);
 
