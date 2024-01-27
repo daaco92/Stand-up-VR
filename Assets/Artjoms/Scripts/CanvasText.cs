@@ -2,22 +2,39 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 
-
 public class CanvasText : MonoBehaviour
 {
-    [SerializeField] private string[] jokes;
     [SerializeField] private TextMeshProUGUI[] canvases;
+    private GetJokeScript jokes;
 
     private void Start()
-    {
+    {   
         StartCoroutine("TimeCounter");
+        StartCoroutine("TeleprompterJokes");
+    }
+
+    private IEnumerator TeleprompterJokes()
+    {
+        jokes = new GetJokeScript();
+        string[] text = new string[2];
+
+        while (true)
+        {
+            text = jokes.GetJoke();
+            Debug.Log("now " + text[0] + " " + text[0].Length);
+            yield return new WaitForSeconds(3);
+
+            Debug.Log("now" + text[1] + " " + text[0].Length);
+            yield return new WaitForSeconds(3);
+        }
     }
 
     private IEnumerator TimeCounter()
     {
-        string displayedText;
         int seconds = 0;
         int minutes = 0; 
+
+        string displayedText;
         string elapsedSeconds, elapsedMinutes;  
         
         while(true)
@@ -42,7 +59,7 @@ public class CanvasText : MonoBehaviour
 
             displayedText = elapsedMinutes + ":" + elapsedSeconds;
 
-            Debug.Log(displayedText);
+            //Debug.Log(displayedText);
             canvases[1].text = displayedText;
         }
     }
