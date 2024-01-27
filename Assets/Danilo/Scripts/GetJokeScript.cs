@@ -5,7 +5,7 @@ using UnityEngine;
 using Newtonsoft.Json;
 using JetBrains.Annotations;
 
-public class GetJokeScript : MonoBehaviour
+public class GetJokeScript
 {
     // Start is called before the first frame update
     public string[] GetJoke()
