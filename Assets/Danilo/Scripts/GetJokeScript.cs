@@ -1,15 +1,16 @@
 using System;
 using System.IO;
 using System.Net;
-using UnityEngine;
+using Assets.Danilo.Scripts;
 using Newtonsoft.Json;
+using UnityEngine;
 
 public class GetJokeScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    string[] GetJoke()
+    public Joke GetJoke()
     {
-        string[] joke = new string[2];
+        Joke joke = new Joke();
+
         try
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://v2.jokeapi.dev/joke/Any");
@@ -17,21 +18,20 @@ public class GetJokeScript : MonoBehaviour
 
             StreamReader reader = new StreamReader(response.GetResponseStream());
             string json = reader.ReadToEnd();
-            Debug.Log(json);
-            Joke result = JsonConvert.DeserializeObject<Joke>(json);
-            
-            
-            Debug.Log(result.setup);
-            Debug.Log(result.delivery);
+            //Debug.Log(json);
+            JokeData result = JsonConvert.DeserializeObject<JokeData>(json);
 
-            joke[0] = result.setup;
-            joke[1] = result.delivery;
-            return joke;
+            if (result.error == true || result == null)
+            {
+                return new Joke { setup = "ERROR: ", delivery = "MUST WAIT A MOMENT" };
+            }
+
+            return new Joke { setup = result.setup, delivery = result.delivery };
         }
         catch (Exception e)
         {
-            Debug.Log("An Errorrr ocurred: " + e.Message);
-            return joke;
+            //Debug.Log("An Errorrr ocurred: " + e.Message);
+            return new Joke { setup = "ERROR: ", delivery = e.Message };
         }
     }
 
@@ -47,7 +47,7 @@ public class GetJokeScript : MonoBehaviour
     }
 
     [Serializable]
-    public class Joke
+    public class JokeData
     {
         public bool error;
         public string category;
