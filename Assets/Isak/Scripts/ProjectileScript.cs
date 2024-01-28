@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 
 public class ProjectileScript : MonoBehaviour
 {
-    public GameObject[] fruits;
+    //public GameObject[] fruits;
     public GameObject[] audience;
     public GameObject target;
     public Transform throwRelease;
@@ -45,8 +45,9 @@ public class ProjectileScript : MonoBehaviour
                 projectile.transform.rotation = throwRelease.transform.rotation;
                 projectile.SetActive(true);
             }
-
-            projectile.GetComponent<Rigidbody>().velocity = throwRelease.forward * (-projectileAngle + projectileForce) * 0.006f;
+            float distanceFix = (Vector3.Distance(throwRelease.position, target.transform.position) - 10) * 50;
+            projectile.GetComponent<Rigidbody>().velocity = throwRelease.forward * (-projectileAngle + projectileForce + distanceFix) * 0.006f;
+            //Debug.Log(Vector3.Distance(throwRelease.position, target.transform.position));
 
             yield return new WaitForSeconds(4f);
             projectile.SetActive(false);

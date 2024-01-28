@@ -7,10 +7,20 @@ public class CanvasText : MonoBehaviour
 {
     [SerializeField] private string[] jokes;
     [SerializeField] private TextMeshProUGUI[] canvases;
+    bool makingSound;
+    int score = 0;
 
     private void Start()
     {
         StartCoroutine("TimeCounter");
+    }
+    void Update(){
+        if(makingSound)
+            score++;
+        Debug.Log(score);
+    }
+    public void OnOff(bool keeper){
+        makingSound = keeper;
     }
 
     private IEnumerator TimeCounter()
