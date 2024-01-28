@@ -14,7 +14,7 @@ public class CanvasText : MonoBehaviour
     JokeLibrary joke;
 
     private float timer;
-    List<string> displayedJoke;
+    List<string> displayedJoke = new();
     int health;
 
     //private GetJokeScript jokes;
@@ -70,7 +70,7 @@ public class CanvasText : MonoBehaviour
     {
         while(!dead)
         {
-            displayedJoke = joke.JokeAssembler();
+            displayedJoke = joke.MakeList();
 
             canvases[0].text = displayedJoke[0];
             yield return new WaitForSeconds(4);

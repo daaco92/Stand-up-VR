@@ -15,10 +15,10 @@ public class MicTest : MonoBehaviour
     int score = 0;
     void Start()
     {
-        foreach (var device in Microphone.devices)
+        /*foreach (var device in Microphone.devices)
         {
             Debug.Log("Name: " + device);
-        }
+        }*/
         string mic = Microphone.devices[0];
         audioSource.clip = Microphone.Start(mic, true, 1, 44100);
         audioSource.Play();

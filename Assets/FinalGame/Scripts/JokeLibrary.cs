@@ -5,15 +5,18 @@ public class JokeLibrary : MonoBehaviour
 {
     List<string> joke = new();
     List<string> punchLine = new();
-    public List<string> completeJoke = new();
+    public List<string> completeJoke = new(), completeCompleteJoke = new();
     int index;
 
-    void Start()
+    public List<string> MakeList()
     {
         JokeLib();
         PunchLineLib();
+        completeCompleteJoke = JokeAssembler();
+
+        return completeCompleteJoke;
     }
-    public List<string> JokeAssembler()
+    List<string> JokeAssembler()
     {
         index = Random.Range(0, 13);
 

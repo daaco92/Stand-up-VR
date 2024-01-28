@@ -4,7 +4,10 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/FinalGame/Scenes/IsakTestScene.unity
+    guid: d7cb7a478b5938244a5f0b5e356f8e37
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: c2a95a58f25c39947940e7f3c30bae43, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 376ae068cbbe99646891dc87bba5b54f, type: 2}
