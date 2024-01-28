@@ -41,7 +41,7 @@ public class ProjectileScript : MonoBehaviour
             StartCoroutine(Throw(audience[Random.Range(0, audience.Length)]));
         }*/
     }
-    void ThrowOnOff(bool onOff){
+    public void ThrowOnOff(bool onOff){
         throwProjectile = onOff;
     }
 

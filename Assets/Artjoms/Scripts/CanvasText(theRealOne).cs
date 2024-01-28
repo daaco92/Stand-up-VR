@@ -1,15 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
+using Unity.XR.CoreUtils;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CanvasText : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI[] canvases;
+    public GameObject healthbarCanvas, scoreBoardCanvas;
+    public ProjectileScript pScript;
     JokeLibrary joke;
 
     private float timer;
     List<string> displayedJoke;
+    int health;
 
     //private GetJokeScript jokes;
     //string[] text = new string[2];
@@ -21,6 +27,7 @@ public class CanvasText : MonoBehaviour
         joke = GetComponent<JokeLibrary>();
         //jokes = new GetJokeScript();
         StartCoroutine(TeleprompterJokes());
+        health = healthbarCanvas.transform.childCount;
     }
 
     private void Update ()
@@ -51,7 +58,9 @@ public class CanvasText : MonoBehaviour
 
         if(dead)
         {
+            scoreBoardCanvas.SetActive(true);
             FinalScore(formatedTime);
+            pScript.ThrowOnOff(false);
         }
     }
 
@@ -69,6 +78,16 @@ public class CanvasText : MonoBehaviour
             canvases[0].text = displayedJoke[1];
             yield return new WaitForSeconds(4);
         }
+    }
+
+    public void LoseHealth(){
+        healthbarCanvas.GetComponent<HorizontalLayoutGroup>().enabled = false;
+        if(health > 0){
+            health--;
+            healthbarCanvas.transform.GetChild(health).gameObject.SetActive(false);
+        }
+        if(health == 0)
+            dead = true;
     }
 
 

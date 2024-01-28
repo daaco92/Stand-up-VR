@@ -5,6 +5,7 @@ using UnityEngine;
 public class HitCollisionScript : MonoBehaviour
 {
     public ProjectileHitScript pHitScript;
+    public CanvasText healthbarScript;
     public AudioSource tomato, piano;
     public void OnCollisionEnter(Collision collision){
         StartCoroutine(pHitScript.ScreenSplash());
@@ -13,6 +14,7 @@ public class HitCollisionScript : MonoBehaviour
         } else {
             PlaySound();
         }
+        healthbarScript.LoseHealth();
     }
 
     void PlaySound(){

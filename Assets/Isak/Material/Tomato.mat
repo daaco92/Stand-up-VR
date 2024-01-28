@@ -125,7 +125,7 @@ Material:
     - _SrcBlend: 5
     - _SrcBlendAlpha: 1
     - _Surface: 1
-    - _Tiling_and_Alpha: 0.14200571
+    - _Tiling_and_Alpha: 0.20800585
     - _WorkflowMode: 1
     - _ZWrite: 0
     m_Colors:
