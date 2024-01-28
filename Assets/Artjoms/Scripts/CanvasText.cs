@@ -1,5 +1,6 @@
 using Assets.Danilo.Scripts;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ public class CanvasText : MonoBehaviour
     [SerializeField] private TextMeshProUGUI[] canvases;
 
     private float timer;
-    Joke displayedJoke;
+    private IEnumerator fetchJoke;
     private GetJokeScript jokes;
     
     //string[] text = new string[2];
@@ -17,7 +18,8 @@ public class CanvasText : MonoBehaviour
 
     private void Start()
     {
-        jokes = new GetJokeScript();
+        GameObject jokesObject = new GameObject("JokesObject");
+        jokes = jokesObject.AddComponent<GetJokeScript>();
         StartCoroutine(TeleprompterJokes());
     }
 
@@ -60,23 +62,13 @@ public class CanvasText : MonoBehaviour
     {
         while (!dead)
         {
-            try
-            {
-                displayedJoke = jokes.GetJoke();
-            }
-            catch (System.Exception )
-            {
-                displayedJoke.setup = "NULL";
-                displayedJoke.delivery = "NULL";
-            }
-            
-            print(displayedJoke.setup);
-            print(displayedJoke.delivery);
-
-            canvases[0].text = displayedJoke.setup;
+            Joke joke = jokes.GetJoke();
+            canvases[0].text = joke.setup;
+            print(joke.setup);
             yield return new WaitForSeconds(4);
 
-            canvases[0].text = displayedJoke.delivery;
+            canvases[0].text = joke.delivery;
+            print(joke.delivery);
             yield return new WaitForSeconds(4);
         }
     }
