@@ -3,16 +3,17 @@ using System.IO;
 using System.Net;
 using UnityEngine;
 using Newtonsoft.Json;
+using JetBrains.Annotations;
 
-public class GetJokeScript : MonoBehaviour
+public class GetJokeScript
 {
     // Start is called before the first frame update
-    string[] GetJoke()
+    public string[] GetJoke()
     {
         string[] joke = new string[2];
         try
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://v2.jokeapi.dev/joke/Any");
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&type=twopart");
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
             StreamReader reader = new StreamReader(response.GetResponseStream());
@@ -21,8 +22,8 @@ public class GetJokeScript : MonoBehaviour
             Joke result = JsonConvert.DeserializeObject<Joke>(json);
             
             
-            Debug.Log(result.setup);
-            Debug.Log(result.delivery);
+            // Debug.Log(result.setup);
+            // Debug.Log(result.delivery);
 
             joke[0] = result.setup;
             joke[1] = result.delivery;
