@@ -8,6 +8,7 @@ using Random = UnityEngine.Random;
 public class ProjectileScript : MonoBehaviour
 {
     //public GameObject[] fruits;
+    public ProjectileHitScript pHitScript;
     public GameObject[] audience;
     public GameObject target;
     public Transform throwRelease;
@@ -27,6 +28,8 @@ public class ProjectileScript : MonoBehaviour
             StartCoroutine(Throw(audience[Random.Range(0, audience.Length)]));
         if(Input.GetMouseButtonDown(0)){
             StartCoroutine(Throw(audience[Random.Range(0, audience.Length)]));
+            Debug.Log("Hit");
+            StartCoroutine(pHitScript.ScreenSplash());
         }
     }
 

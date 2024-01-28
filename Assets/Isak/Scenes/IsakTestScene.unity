@@ -400,7 +400,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a33a1187c1bc22842b7d0b0644cde811, type: 2}
+  - {fileID: 2100000, guid: 6e56087d9db3797448dcd97d49518f8f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -440,7 +440,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -18.03, y: -16.5869, z: -1.0334}
-  m_LocalScale: {x: 1, y: 10.3263, z: 36.902245}
+  m_LocalScale: {x: 0.18480101, y: 1.9083107, z: 6.8195724}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1563,7 +1563,7 @@ GameObject:
   - component: {fileID: 1517104475}
   - component: {fileID: 1517104474}
   m_Layer: 5
-  m_Name: Tomato
+  m_Name: TomatoSplash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2414,6 +2414,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3470f327825eaf418a32053930b6764, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pHitScript: {fileID: 0}
   audience:
   - {fileID: 996987978}
   - {fileID: 1003422417}
@@ -2609,6 +2610,7 @@ GameObject:
   - component: {fileID: 1946041826}
   - component: {fileID: 1946041825}
   - component: {fileID: 1946041824}
+  - component: {fileID: 1946041827}
   m_Layer: 0
   m_Name: ProjectileManager
   m_TagString: Untagged
@@ -2656,6 +2658,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3470f327825eaf418a32053930b6764, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pHitScript: {fileID: 1946041827}
   audience:
   - {fileID: 996987978}
   - {fileID: 1003422417}
@@ -2686,6 +2689,20 @@ MonoBehaviour:
   - {fileID: 4060608326555112035, guid: cdac31831451d7844bfdea4964008893, type: 3}
   - {fileID: 4857847697054468208, guid: bf46d986d6a294547b4450f101271270, type: 3}
   amountToPool: 1000
+--- !u!114 &1946041827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1946041822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b6722e86e0e97442a7b207bd224bffd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  screenOverlay: {fileID: 430199251}
+  decay: 0.002
 --- !u!1001 &2012623355
 PrefabInstance:
   m_ObjectHideFlags: 0
