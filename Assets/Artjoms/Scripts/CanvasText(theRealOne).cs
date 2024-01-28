@@ -1,24 +1,44 @@
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class CanvasText : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI[] canvases;
-    private GetJokeScript jokes;
+    JokeLibrary joke;
+
     private float timer;
-    string[] text = new string[2];
+    List<string> displayedJoke;
+
+    //private GetJokeScript jokes;
+    //string[] text = new string[2];
+
+    [SerializeField] private bool dead = false;
 
     private void Start()
     {   
-        //StartCoroutine("TeleprompterJokes");
-        jokes = new GetJokeScript();
-        //StartCoroutine(TeleprompterJokes());
+        joke = GetComponent<JokeLibrary>();
+        //jokes = new GetJokeScript();
+        StartCoroutine(TeleprompterJokes());
     }
 
     private void Update ()
     {
-        timer += Time.deltaTime;
-        //TimeConverter();
+        if(!dead)
+        {
+            timer += Time.deltaTime;
+            TimeConverter();
+        }
+        else
+        {
+            TimeConverter();
+        }
+    }
+
+    private void FinalScore(string timeSurvived)
+    {
+        canvases[2].text = "Player has survived for " + timeSurvived;
     }
 
     private void TimeConverter()
@@ -28,23 +48,32 @@ public class CanvasText : MonoBehaviour
 
         string formatedTime = string.Format("{00:00} : {01:00}", minutes, seconds);
         canvases[1].text = formatedTime;
+
+        if(dead)
+        {
+            FinalScore(formatedTime);
+        }
     }
 
     //Under Construction
-    // private IEnumerator TeleprompterJokes()
-    // {
-    //     while(true)
-    //     {
-    //         text = jokes.GetJoke();
-    //         Debug.Log(text[0]);
-    //         yield return new WaitForSeconds(3);
 
-    //         Debug.Log(text[1]);
-    //         yield return new WaitForSeconds(20);
-    //     }
-    // }
+    private IEnumerator TeleprompterJokes()
+    {
+        while(!dead)
+        {
+            displayedJoke = joke.JokeAssembler();
 
-    //Never to be spoken about (Learning opportunity)
+            canvases[0].text = displayedJoke[0];
+            yield return new WaitForSeconds(4);
+
+            canvases[0].text = displayedJoke[1];
+            yield return new WaitForSeconds(4);
+        }
+    }
+
+
+    //Never to be spoken of (Learning opportunity)
+
     // private IEnumerator TimeCounter()
     // {
     //     int seconds = 0;
