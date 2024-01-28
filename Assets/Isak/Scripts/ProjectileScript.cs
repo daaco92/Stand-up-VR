@@ -8,14 +8,18 @@ using Random = UnityEngine.Random;
 public class ProjectileScript : MonoBehaviour
 {
     //public GameObject[] fruits;
-    public ProjectileHitScript pHitScript;
     public GameObject[] audience;
     public GameObject target;
     public Transform throwRelease;
     /// <summary>
     /// Time for MATH
     /// </summary>
-    float projectileAngle, throwDistance;
+    float projectileAngle, throwDistance, throwTime = 0;
+    [SerializeField][Tooltip("How often they should throw")][Range(0f, 1f)]
+    float throwDelay;
+    [SerializeField][Tooltip("The increase in throwingspeed overtime")][Range(0f, 0.5f)]
+    float throwDecay;
+    public bool throwProjectile = true;
     [Range(100f, 5000f)]public float projectileForce;
 
     void Start(){
@@ -25,12 +29,20 @@ public class ProjectileScript : MonoBehaviour
     }
     void Update()
     {
+        throwTime += Time.deltaTime;
+        if(throwTime > throwDelay && throwProjectile){
             StartCoroutine(Throw(audience[Random.Range(0, audience.Length)]));
-        if(Input.GetMouseButtonDown(0)){
-            StartCoroutine(Throw(audience[Random.Range(0, audience.Length)]));
-            Debug.Log("Hit");
-            StartCoroutine(pHitScript.ScreenSplash());
+            throwTime = 0;
         }
+        if(throwDelay > 0.2f){
+                throwDelay -= throwDecay * Time.deltaTime;
+            }
+        /*if(Input.GetMouseButtonDown(0)){
+            StartCoroutine(Throw(audience[Random.Range(0, audience.Length)]));
+        }*/
+    }
+    void ThrowOnOff(bool onOff){
+        throwProjectile = onOff;
     }
 
     IEnumerator Throw(GameObject thrower){

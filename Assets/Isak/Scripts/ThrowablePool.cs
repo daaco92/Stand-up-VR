@@ -7,6 +7,7 @@ public class ThrowablePool : MonoBehaviour
     public static ThrowablePool SharedInstance;
     public List<GameObject> pooledObjects;
     public GameObject[] objectToPool;
+    public GameObject pianoObj;
     public int amountToPool;
 
     void Awake()
@@ -21,7 +22,11 @@ public class ThrowablePool : MonoBehaviour
 
         for(int i = 0; i < amountToPool; i++)
         {
+            if(i == 18){
+                tmp = Instantiate(pianoObj);
+            } else {
                 tmp = Instantiate(objectToPool[Random.Range(0, objectToPool.Length)]);
+            }
                 tmp.SetActive(false);
                 pooledObjects.Add(tmp);
             }
